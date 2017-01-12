@@ -1,8 +1,7 @@
 /**
  * Created by Lixing on 12/1/17.
  */
-import React, { Component } from 'react';
-import ListItem from './ListItem';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 class SiteList extends Component {
@@ -27,6 +26,10 @@ class SiteList extends Component {
 
 const mapStateToProps = (state) => {
   return { sites : state.sites }
+};
+
+SiteList.propTypes = {
+  sites: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps)(SiteList);

@@ -1,7 +1,7 @@
 /**
  * Created by Lixing on 12/1/17.
  */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { searchSite } from '../actions';
 import { bindActionCreators } from 'redux';
@@ -33,6 +33,9 @@ const  mapDispatchToProps = (dispatch) => {
   return bindActionCreators({searchSite: searchSite}, dispatch);
 };
 
+SearchBox.propTypes = {
+  searchSite: PropTypes.func.isRequired
+};
 
 export default connect(null, mapDispatchToProps)(SearchBox);
 

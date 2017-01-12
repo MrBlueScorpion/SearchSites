@@ -41,6 +41,7 @@ const searchSitesByKeywords = (keywords) => {
   } else {
     siteIds = searchSitesIdsByKeyword(keywords);
   }
+
   siteIds = siteIds.filter((value, index, self) => self.indexOf(value) === index);
 
   return siteIds.map((siteId) => {
