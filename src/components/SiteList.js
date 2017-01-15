@@ -2,9 +2,8 @@
  * Created by Lixing on 12/1/17.
  */
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 
-export class SiteList extends Component {
+class SiteList extends Component {
   renderList() {
     return this.props.sites.map((site) => {
       return (
@@ -16,12 +15,6 @@ export class SiteList extends Component {
     });
   }
   render() {
-    if (!this.props.sites.length && this.props.keyword.length) {
-      return (
-        <p style={style.error}>We currently don't have any results for your search, try another</p>
-      );
-    }
-
     return (
       <ul style={style.container}>
         {this.renderList()}
@@ -30,13 +23,13 @@ export class SiteList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state.result;
+SiteList.propTypes = {
+  sites: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 const style = {
   container: {
-    paddingLeft: 0,
+    paddingLeft: 0
   },
   list: {
     marginBottom: 20,
@@ -44,12 +37,7 @@ const style = {
   },
   description: {
     margin: 1
-  },
-  error: {
-    fontSize: '1.2em',
-    color: '#a0a2a3',
-    textAlign: 'center'
   }
 };
 
-export default connect(mapStateToProps)(SiteList);
+export default SiteList;

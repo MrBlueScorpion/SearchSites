@@ -7,14 +7,25 @@ import { bindActionCreators } from 'redux';
 import { searchSite } from '../actions';
 import SiteList from './SiteList';
 
-export class SearchBox extends Component {
+export class SearchForm extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+    this.renderResult = this.renderResult.bind(this);
   }
 
   handleChange(e) {
     this.props.searchSite(e.target.value);
+  }
+
+  renderResult() {
+    if (!this.props.sites.length && this.props.keyword.length) {
+      return (
+        <p style={style.error}>We currently don't have any results for your search, try another</p>
+      );
+    }
+
+    return <SiteList sites={this.props.sites} />;
   }
 
   render() {
@@ -30,14 +41,27 @@ export class SearchBox extends Component {
             />
             <i className="icon-search" style={style.searchIcon} />
           </div>
-          <SiteList/>
+          {this.renderResult()}
         </form>
       </div>
-
     );
   }
 }
+
+SearchForm.propTypes = {
+  sites: PropTypes.arrayOf(PropTypes.object),
+  keyword: PropTypes.string,
+  searchSite: PropTypes.func
+};
+
+SearchForm.defaultProps = {
+  sites: [],
+  keyword: '',
+  searchSite: () => {}
+};
+
 const mapDispatchToProps = dispatch => bindActionCreators({ searchSite: searchSite }, dispatch);
+const mapStateToProps = state => state.result;
 
 const style = {
   container: {
@@ -59,7 +83,12 @@ const style = {
     marginLeft: -20,
     marginTop: 3,
     color: '#818285Z'
+  },
+  error: {
+    fontSize: '1.2em',
+    color: '#a0a2a3',
+    textAlign: 'center'
   }
 };
 
-export default connect(null, mapDispatchToProps)(SearchBox);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchForm);

@@ -1,0 +1,25 @@
+exports[`<Header /> should render <Header /> component 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "borderBottomColor": "#d8d8d9",
+      "borderBottomStyle": "solid",
+      "borderBottomWidth": 1,
+      "display": "flex",
+      "height": 80,
+      "justifyContent": "center",
+    }
+  }>
+  <nav
+    style={
+      Object {
+        "width": 1170,
+      }
+    }>
+    <img
+      alt="Adslot"
+      src="logo.png" />
+  </nav>
+</div>
+`;
