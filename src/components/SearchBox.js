@@ -1,7 +1,7 @@
 /**
  * Created by Lixing on 12/1/17.
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchSite } from '../actions';
 import { bindActionCreators } from 'redux';
@@ -15,15 +15,18 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <div>
+      <div style={style.container}>
         <form onSubmit={e => e.preventDefault()}>
-          <input type="text"
-                 className="form-control"
-                 placeholder="Search Publisher"
-                 onChange={this.handleChange.bind(this)}
-          />
+          <div>
+            <input type="text"
+                   style={style.searchInput}
+                   placeholder="Search Publisher"
+                   onChange={this.handleChange.bind(this)}
+            />
+            <i className="icon-search" style={style.searchIcon} />
+          </div>
+          <SiteList/>
         </form>
-        <SiteList/>
       </div>
 
     );
@@ -33,8 +36,29 @@ const  mapDispatchToProps = (dispatch) => {
   return bindActionCreators({searchSite: searchSite}, dispatch);
 };
 
-SearchBox.propTypes = {
-  searchSite: PropTypes.func.isRequired
+
+
+const style = {
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
+  },
+  searchInput: {
+    marginTop: 20,
+    height: 80,
+    width: 1170,
+    boxSizing: 'border-box',
+    fontSize: 1.2 + 'em',
+    paddingLeft: 20
+  },
+  searchIcon: {
+    marginLeft: -20,
+    marginTop: 3,
+    color: '#818285Z'
+  }
 };
 
 export default connect(null, mapDispatchToProps)(SearchBox);

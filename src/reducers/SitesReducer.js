@@ -49,13 +49,18 @@ const searchSitesByKeywords = (keywords) => {
   });
 };
 
-export default (state = [], action) => {
+const INITIAL_STATE = {
+  keyword: '',
+  sites: []
+};
+
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'SEARCH':
       if (action.payload.length === 0) {
-        return [];
+        return INITIAL_STATE;
       }
-      return searchSitesByKeywords(action.payload);
+      return {...state, keyword: action.payload, sites: searchSitesByKeywords(action.payload)};
     default:
       return state;
   }
