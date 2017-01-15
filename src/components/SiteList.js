@@ -1,18 +1,18 @@
 /**
  * Created by Lixing on 12/1/17.
  */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-class SiteList extends Component {
+export class SiteList extends Component {
   renderList() {
     return this.props.sites.map((site) => {
-      return(
+      return (
         <li key={site.id} style={style.list}>
           <a href={'//' + site.siteUrl}>{site.siteName}</a>
           <p style={style.description}>{site.description}</p>
         </li>
-      )
+      );
     });
   }
   render() {
@@ -26,7 +26,7 @@ class SiteList extends Component {
       <ul style={style.container}>
         {this.renderList()}
       </ul>
-    )
+    );
   }
 }
 
@@ -35,18 +35,18 @@ const mapStateToProps = (state) => {
 };
 
 const style = {
-  container : {
+  container: {
     paddingLeft: 0,
   },
   list: {
-    marginBottom : 20,
+    marginBottom: 20,
     listStyleType: 'none'
   },
   description: {
     margin: 1
   },
   error: {
-    fontSize: 1.2 + 'em',
+    fontSize: '1.2em',
     color: '#a0a2a3',
     textAlign: 'center'
   }

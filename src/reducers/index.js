@@ -6,4 +6,4 @@ import SitesReducer from './SitesReducer';
 
 export default combineReducers({
   result: SitesReducer
-})
+});

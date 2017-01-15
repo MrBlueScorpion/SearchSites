@@ -4,15 +4,13 @@
 import React from 'react';
 import Logo from '../assets/logo.png';
 
-const Header = () => {
-  return (
-    <div style={style.container}>
-       <nav style={style.nav}>
-         <img src={Logo} />
-       </nav>
-    </div>
-  )
-};
+const Header = () => (
+  <div style={style.container}>
+    <nav style={style.nav}>
+      <img src={Logo} alt="Adslot" />
+    </nav>
+  </div>
+);
 
 const style = {
   container: {

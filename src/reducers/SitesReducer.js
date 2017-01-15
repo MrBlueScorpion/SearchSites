@@ -4,23 +4,19 @@
 import sites from './sites.json';
 import categories from './categories.json';
 
-sites.map((site) => {
-  site.categories = site.categoryIds.map((categoryId) => {
-    return categories.find((category) => {
-      return category.id === categoryId;
-    });
-  });
+sites.forEach((site) => {
+  site.categories = site.categoryIds.map(categoryId => categories.find(category => category.id === categoryId));
 });
 
 const searchSitesIdsByKeyword = (keyword) => {
   keyword = keyword.trim().toLowerCase();
   let siteIds = [];
-  sites.map((site) => {
+  sites.forEach((site) => {
     if (site.siteName.toLowerCase().includes(keyword) && !siteIds.includes(site.id)) {
       siteIds = [...siteIds, site.id];
     }
 
-    site.categories.map((category) => {
+    site.categories.forEach((category) => {
       if (category.description.toLowerCase().includes(keyword) && !siteIds.includes(site.id)) {
         siteIds = [...siteIds, site.id];
       }
@@ -33,7 +29,7 @@ const searchSitesIdsByKeyword = (keyword) => {
 const searchSitesByKeywords = (keywords) => {
   let siteIds = [];
   if (keywords.includes(',')) {
-    keywords.split(',').map((keyword) => {
+    keywords.split(',').forEach((keyword) => {
       if (keyword.trim().length) {
         siteIds = siteIds.concat(searchSitesIdsByKeyword(keyword));
       }
@@ -44,9 +40,7 @@ const searchSitesByKeywords = (keywords) => {
 
   siteIds = siteIds.filter((value, index, self) => self.indexOf(value) === index);
 
-  return siteIds.map((siteId) => {
-    return sites.find((site) => site.id === siteId)
-  });
+  return siteIds.map(siteId => sites.find(site => site.id === siteId));
 };
 
 const INITIAL_STATE = {
@@ -60,9 +54,8 @@ export default (state = INITIAL_STATE, action) => {
       if (action.payload.length === 0) {
         return INITIAL_STATE;
       }
-      return {...state, keyword: action.payload, sites: searchSitesByKeywords(action.payload)};
+      return { ...state, keyword: action.payload, sites: searchSitesByKeywords(action.payload) };
     default:
       return state;
   }
-
-}
+};

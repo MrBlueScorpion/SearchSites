@@ -1,13 +1,17 @@
 /**
  * Created by Lixing on 12/1/17.
  */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { searchSite } from '../actions';
 import { bindActionCreators } from 'redux';
+import { searchSite } from '../actions';
 import SiteList from './SiteList';
 
-class SearchBox extends Component {
+export class SearchBox extends Component {
+  constructor() {
+    super();
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   handleChange(e) {
     this.props.searchSite(e.target.value);
@@ -18,10 +22,11 @@ class SearchBox extends Component {
       <div style={style.container}>
         <form onSubmit={e => e.preventDefault()}>
           <div>
-            <input type="text"
-                   style={style.searchInput}
-                   placeholder="Search Publisher"
-                   onChange={this.handleChange.bind(this)}
+            <input
+              type="text"
+              style={style.searchInput}
+              placeholder="Search Publisher"
+              onChange={this.handleChange}
             />
             <i className="icon-search" style={style.searchIcon} />
           </div>
@@ -32,11 +37,7 @@ class SearchBox extends Component {
     );
   }
 }
-const  mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({searchSite: searchSite}, dispatch);
-};
-
-
+const mapDispatchToProps = dispatch => bindActionCreators({ searchSite: searchSite }, dispatch);
 
 const style = {
   container: {
@@ -51,7 +52,7 @@ const style = {
     height: 80,
     width: 1170,
     boxSizing: 'border-box',
-    fontSize: 1.2 + 'em',
+    fontSize: '1.2em',
     paddingLeft: 20
   },
   searchIcon: {
@@ -62,5 +63,3 @@ const style = {
 };
 
 export default connect(null, mapDispatchToProps)(SearchBox);
-
-
